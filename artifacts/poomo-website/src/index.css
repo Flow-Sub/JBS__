@@ -1,0 +1,4 @@
+/* Reset — let Webflow CSS take full control */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
