@@ -1,6 +1,6 @@
 {
-  "buildCommand": "pnpm --filter @workspace/poomo-website build",
-  "installCommand": "pnpm install",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd artifacts/poomo-website && npx vite build --config vite.config.ts",
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
