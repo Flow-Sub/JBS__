@@ -5,6 +5,9 @@ import { defineConfig } from 'vite';
 
 const port = Number(process.env.PORT ?? 5173);
 const basePath = process.env.BASE_PATH ?? '/';
+const outDir = process.env.VERCEL_OUTPUT_DIR
+  ? path.resolve(import.meta.dirname, process.env.VERCEL_OUTPUT_DIR)
+  : path.resolve(import.meta.dirname, '..', '..', 'dist');
 
 export default defineConfig({
   base: basePath,
@@ -23,7 +26,7 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname),
   build: {
-    outDir: path.resolve(import.meta.dirname, '..', '..', 'dist'),
+    outDir,
     emptyOutDir: true,
   },
   server: {
