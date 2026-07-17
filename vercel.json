@@ -1,0 +1,12 @@
+{
+  "buildCommand": "pnpm --filter @workspace/poomo-website build",
+  "installCommand": "pnpm install",
+  "outputDirectory": "artifacts/poomo-website/dist",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
