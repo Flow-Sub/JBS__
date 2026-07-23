@@ -13,6 +13,9 @@ const ROUTE_TO_SECTION: Record<string, string> = {
 
 function App() {
   useEffect(() => {
+    const navbar = document.querySelector<HTMLElement>('.navbar.w-nav');
+    navbar?.setAttribute('data-duration', '200');
+
     // Re-initialize Webflow after React mounts
     if ((window as any).Webflow) {
       (window as any).Webflow.destroy();
@@ -31,6 +34,45 @@ function App() {
         });
       });
     }
+
+    const menuButton =
+      document.querySelector<HTMLElement>('.menu-button.w-nav-button');
+    const navLinks =
+      document.querySelectorAll<HTMLAnchorElement>('.nav-menu a[href^="#"]');
+
+    const handleNavClick = (event: Event) => {
+      const link = event.currentTarget as HTMLAnchorElement;
+      const target = document.getElementById(link.hash.slice(1));
+
+      if (!target) {
+        return;
+      }
+
+      event.preventDefault();
+      window.history.replaceState(null, '', link.hash);
+
+      const menuIsOpen =
+        menuButton?.getAttribute('aria-expanded') === 'true' ||
+        menuButton?.classList.contains('w--open');
+
+      if (menuIsOpen) {
+        menuButton?.click();
+      }
+
+      requestAnimationFrame(() => {
+        target.scrollIntoView({ behavior: 'auto', block: 'start' });
+      });
+    };
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', handleNavClick);
+    });
+
+    return () => {
+      navLinks.forEach((link) => {
+        link.removeEventListener('click', handleNavClick);
+      });
+    };
   }, []);
 
   return (
