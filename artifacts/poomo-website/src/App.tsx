@@ -1,4 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import ContactForm from './ContactForm';
+import './contact-form.css';
 
 const WHATSAPP_NUMBER_DISPLAY = '0300 1766258';
 const WHATSAPP_LINK = 'https://wa.me/923001766258';
@@ -12,7 +15,30 @@ const ROUTE_TO_SECTION: Record<string, string> = {
 };
 
 function App() {
+  const [contactMount, setContactMount] = useState<HTMLElement | null>(null);
+
   useEffect(() => {
+    const footer = document.querySelector<HTMLElement>('.footer-wrapper');
+    const originalFooterId = footer?.id ?? '';
+    let formMount = document.getElementById('contact');
+
+    if (footer && formMount === footer) {
+      footer.id = 'footer';
+      formMount = document.createElement('div');
+      formMount.id = 'contact';
+      formMount.className = 'contact-form-mount';
+      footer.before(formMount);
+    }
+
+    setContactMount(formMount);
+
+    const discoveryCall =
+      document.querySelector<HTMLAnchorElement>(
+        '.section-cta-button a[href^="tel:"]',
+      );
+    const originalDiscoveryHref = discoveryCall?.getAttribute('href');
+    discoveryCall?.setAttribute('href', '#contact');
+
     const navbar = document.querySelector<HTMLElement>('.navbar.w-nav');
     navbar?.setAttribute('data-duration', '200');
 
@@ -28,9 +54,11 @@ function App() {
       const hash = `#${sectionId}`;
       window.history.replaceState(null, '', hash);
       requestAnimationFrame(() => {
-        document.getElementById(sectionId)?.scrollIntoView({
-          behavior: 'auto',
-          block: 'start',
+        requestAnimationFrame(() => {
+          document.getElementById(sectionId)?.scrollIntoView({
+            behavior: 'auto',
+            block: 'start',
+          });
         });
       });
     }
@@ -38,7 +66,7 @@ function App() {
     const menuButton =
       document.querySelector<HTMLElement>('.menu-button.w-nav-button');
     const navLinks =
-      document.querySelectorAll<HTMLAnchorElement>('.nav-menu a[href^="#"]');
+      document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
 
     const handleNavClick = (event: Event) => {
       const link = event.currentTarget as HTMLAnchorElement;
@@ -72,11 +100,23 @@ function App() {
       navLinks.forEach((link) => {
         link.removeEventListener('click', handleNavClick);
       });
+
+      if (discoveryCall && originalDiscoveryHref) {
+        discoveryCall.setAttribute('href', originalDiscoveryHref);
+      }
+
+      if (footer && formMount && formMount !== footer) {
+        formMount.remove();
+        footer.id = originalFooterId;
+      }
     };
   }, []);
 
   return (
-    <WhatsAppFloatingButton />
+    <>
+      {contactMount ? createPortal(<ContactForm />, contactMount) : null}
+      <WhatsAppFloatingButton />
+    </>
   );
 }
 

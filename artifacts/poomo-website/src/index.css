@@ -16,6 +16,10 @@ html {
   scroll-margin-top: 96px;
 }
 
+#contact {
+  background: #101114;
+}
+
 .page-wrapper {
   isolation: isolate;
   position: relative;
