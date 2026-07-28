@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jbsglobal.com/</loc>
+    <loc>https://jbsglobals.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://jbsglobal.com/about-us</loc>
+    <loc>https://jbsglobals.com/about-us</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jbsglobal.com/service</loc>
+    <loc>https://jbsglobals.com/service</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jbsglobal.com/project</loc>
+    <loc>https://jbsglobals.com/project</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jbsglobal.com/blogs</loc>
+    <loc>https://jbsglobals.com/blogs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://jbsglobal.com/contact</loc>
+    <loc>https://jbsglobals.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
