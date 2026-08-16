@@ -156,6 +156,10 @@ html {
   grid-column: span 6;
 }
 
+.service-card-grid--digital .service-card:last-child:nth-child(odd) {
+  grid-column: 4 / span 6;
+}
+
 .service-card-grid--operations .service-card {
   grid-column: span 4;
 }
